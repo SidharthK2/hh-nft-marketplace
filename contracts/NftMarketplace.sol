@@ -130,7 +130,6 @@ contract NftMarketplace is ReentrancyGuard {
                 listedItem.price
             );
         }
-
         //push over pull ✅
         s_proceeds[listedItem.seller] =
             s_proceeds[listedItem.seller] +
@@ -162,7 +161,12 @@ contract NftMarketplace is ReentrancyGuard {
         uint256 newPrice
     ) external isListed(nftAddress, tokenId) {
         s_listings[nftAddress][tokenId].price = newPrice;
-        emit ItemListed(msg.sender, nftAddress, tokenId, newPrice);
+        emit ItemListed(
+            msg.sender,
+            nftAddress,
+            tokenId,
+            s_listings[nftAddress][tokenId].price
+        );
     }
 
     function withdrawProceeds() external {
